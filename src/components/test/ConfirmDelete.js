@@ -17,18 +17,18 @@ class ConfirmDelete extends React.Component {
   }
 
   onDelete() {
-    const url = DELETE_URL.replace('/0/', '/'+this.props.record.id+'/')
+    const url = DELETE_URL.replace('/0/', '/' + this.props.record.id + '/')
 
     axios.delete(url)
       .then(() => this.props.afterSubmit())
       .catch(r => {
         console.log(r);
-        this.setState({ errors: r })
+        this.setState({errors: r})
       })
   }
 
   render() {
-    const { onClose } = this.props
+    const {onClose} = this.props
 
     return (
       <Modal show={true} onHide={onClose}>

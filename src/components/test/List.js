@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import _ from 'lodash';
 import axios from 'axios';
 import { Table, Badge, MenuItem, DropdownButton, Button, Row, Col } from 'react-bootstrap';
@@ -28,24 +28,24 @@ class List extends Component {
   fetchList() {
 
     /*axios.get(REPORT_TYPE_LIST_URL).then(res => {
-      let sortedList = _.sortBy(res.data, item => item.order)
-      this.setState({list: sortedList})
-    })*/
+     let sortedList = _.sortBy(res.data, item => item.order)
+     this.setState({list: sortedList})
+     })*/
   }
 
   afterSave() {
     this.fetchList()
-    this.setState({ modalComponent: null })
+    this.setState({modalComponent: null})
   }
 
   openEditForm(item) {
     const modalComponent = <Form onClose={this.onClose} afterSubmit={this.afterSave} record={item}/>
-    this.setState({ modalComponent })
+    this.setState({modalComponent})
   }
 
   openConfirmDelete(item) {
-    const modalComponent = <ConfirmDelete onClose={this.onClose} afterSubmit={this.afterSave} record={item} />
-    this.setState({ modalComponent })
+    const modalComponent = <ConfirmDelete onClose={this.onClose} afterSubmit={this.afterSave} record={item}/>
+    this.setState({modalComponent})
   }
 
   move(id, toUp) {
@@ -63,21 +63,21 @@ class List extends Component {
     const ordered = _.map(list, value => value.id)
 
     /*axios.put(PUT_ORDER_URL, { ordered }).then(res => {
-      let sortedList = _.sortBy(res.data, item => item.order)
-      this.setState({list: sortedList})
-    })*/
+     let sortedList = _.sortBy(res.data, item => item.order)
+     this.setState({list: sortedList})
+     })*/
   }
 
   onConfirm() {
-    this.setState({ modalComponent: null })
+    this.setState({modalComponent: null})
   }
 
   onClose() {
-    this.setState({ modalComponent: null })
+    this.setState({modalComponent: null})
   }
 
   render() {
-    const { list, modalComponent } = this.state
+    const {list, modalComponent} = this.state
     const firstKey = _.toInteger(_.findKey(list))
     const lastKey = _.toInteger(_.findLastKey(list))
 
@@ -94,7 +94,7 @@ class List extends Component {
             {_.map(list, (item, key) => (
               <tr key={item.id}>
                 <td>
-                  <DropdownButton bsSize="sm" noCaret title={<i className="fa fa-ellipsis-v" />} id={'dropdown-basic-1'}>
+                  <DropdownButton bsSize="sm" noCaret title={<i className="fa fa-ellipsis-v"/>} id={'dropdown-basic-1'}>
                     <MenuItem onClick={this.openEditForm.bind(this, item)}>
                       <i className="fa fa-pencil"/> Edit
                     </MenuItem>
@@ -107,20 +107,22 @@ class List extends Component {
                   <Badge bsStyle="info">{item.code}</Badge>
                 </td>
                 <td>
-                  <Badge style={{ backgroundColor: item.color }}>&nbsp;</Badge>
+                  <Badge style={{backgroundColor: item.color}}>&nbsp;</Badge>
                 </td>
                 <td>{item.name}</td>
                 <td>
                   <div style={{width: 55}}>
                     {key !== firstKey &&
-                      <Button bsSize="sm" bsStyle="info" className="pull-left" onClick={this.move.bind(this, item.id, true)}>
-                        <i className="fa fa-long-arrow-up"/>
-                      </Button>
+                    <Button bsSize="sm" bsStyle="info" className="pull-left"
+                            onClick={this.move.bind(this, item.id, true)}>
+                      <i className="fa fa-long-arrow-up"/>
+                    </Button>
                     }
                     {key !== lastKey &&
-                      <Button bsSize="sm" bsStyle="info" className="pull-right" onClick={this.move.bind(this, item.id, false)}>
-                        <i className="fa fa-long-arrow-down"/>
-                      </Button>
+                    <Button bsSize="sm" bsStyle="info" className="pull-right"
+                            onClick={this.move.bind(this, item.id, false)}>
+                      <i className="fa fa-long-arrow-down"/>
+                    </Button>
                     }
                   </div>
                 </td>
@@ -136,8 +138,6 @@ class List extends Component {
     );
   }
 }
-
-
 
 
 export default List;

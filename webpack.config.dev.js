@@ -2,7 +2,7 @@ const { resolve } = require('path');
 const webpack = require('webpack');
 
 module.exports = {
-  // devtool: 'inline-source-map',
+  devtool: 'inline-source-map',
 
   entry: [
     'react-hot-loader/patch',
@@ -18,7 +18,10 @@ module.exports = {
     hot: true,
     inline: true,
     contentBase: resolve(__dirname, 'public'),
-    publicPath: '/'
+    publicPath: '/',
+    historyApiFallback: {
+      index: 'index.html'
+    }
   },
 
   module: {

@@ -41,7 +41,7 @@ class From extends React.Component {
   }
 
   closeColorPicker() {
-    this.setState({ displayColorPicker: false })
+    this.setState({displayColorPicker: false})
   }
 
   onFocus(e) {
@@ -72,7 +72,7 @@ class From extends React.Component {
   };
 
   onSave() {
-    const url = this.props.record.id ? PUT_URL.replace('/0/', '/'+this.props.record.id+'/') : POST_URL
+    const url = this.props.record.id ? PUT_URL.replace('/0/', '/' + this.props.record.id + '/') : POST_URL
     const httpMethod = this.props.record.id ? 'put' : 'post'
 
     axios[httpMethod](url, this.state.record)
@@ -81,13 +81,13 @@ class From extends React.Component {
         const errors = _.mapValues(r.response.data.error.form.children, item => {
           return item.errors ? item.errors.join(' ') : ''
         })
-        this.setState({ errors })
+        this.setState({errors})
       })
   }
 
   render() {
-    const { record, displayColorPicker, errors } = this.state
-    const { onClose } = this.props
+    const {record, displayColorPicker, errors} = this.state
+    const {onClose} = this.props
 
     return (
       <Modal id="report-type-form" show={true} onHide={onClose}>
@@ -98,19 +98,19 @@ class From extends React.Component {
 
           <FormGroup className="required" validationState={errors.code ? 'error' : null}>
             <ControlLabel>Code</ControlLabel>
-            <FormControl name="code" value={record.code} onChange={this.onChange} onFocus={this.onFocus} />
+            <FormControl name="code" value={record.code} onChange={this.onChange} onFocus={this.onFocus}/>
             {errors.code && <HelpBlock>{errors.code}</HelpBlock>}
           </FormGroup>
 
           <FormGroup className="required" validationState={errors.name ? 'error' : null}>
             <ControlLabel>Name</ControlLabel>
-            <FormControl name="name" value={record.name} onChange={this.onChange} onFocus={this.onFocus} />
+            <FormControl name="name" value={record.name} onChange={this.onChange} onFocus={this.onFocus}/>
             {errors.name && <HelpBlock>{errors.name}</HelpBlock>}
           </FormGroup>
 
           <FormGroup className="required" validationState={errors.color ? 'error' : null}>
             <ControlLabel>Color</ControlLabel>
-            <FormControl  name="color" value={record.color} onChange={this.onChange} onFocus={this.openColorPicker} />
+            <FormControl name="color" value={record.color} onChange={this.onChange} onFocus={this.openColorPicker}/>
             {errors.color && <HelpBlock>{errors.color}</HelpBlock>}
 
           </FormGroup>
