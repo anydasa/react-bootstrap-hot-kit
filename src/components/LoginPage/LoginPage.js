@@ -1,12 +1,13 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
+import Form from './Form';
 
 class Login extends React.Component {
   render() {
     return (
       <Row>
         <Col>
-          Login
+          <Form/>
         </Col>
       </Row>
     );

@@ -6,3 +6,4 @@ export HomePage from './HomePage/HomePage';
 export NotFound from './NotFound/NotFound';
 export LoginPage from './LoginPage/LoginPage';
 export AccountPage from './Account/AccountPage';
+export UsersPage from './Account/UsersPage';

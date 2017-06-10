@@ -19,8 +19,8 @@ export default (
 
     <Route path="/account" component={Container.requireAuth(Container.App)}>
       <IndexRoute component={Container.AccountPage}/>
+      <Route path="users" component={Container.UsersPage}/>
     </Route>
-
 
     <Route path="*" component={Container.NotFound}/>
   </Router>

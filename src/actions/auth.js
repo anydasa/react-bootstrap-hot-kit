@@ -1,53 +1,24 @@
-// import { securityCreateToken } from 'utils/api';
-import { SET_AUTH } from './../reducers/auth';
-import { browserHistory } from 'react-router';
-import moment from 'moment';
+import { auth, getMineInfo } from './../utils/api'
 
+export const SET_AUTH_TOKEN = 'SET_AUTH_TOKEN'
+export const REMOVE_AUTH = 'REMOVE_AUTH_TOKEN'
+export const SET_MINE_INFO = 'SET_AUTH'
 
-export function setAuth(data) {
-  return {
-    type: SET_AUTH,
-    data
-  };
-}
-
-export function removeAuth() {
-  return {
-    type: SET_AUTH
-  };
-}
 
 export function logout() {
-  return dispatch => dispatch(removeAuth())
+  return dispatch => dispatch({ type: REMOVE_AUTH })
 }
 
-export function login(values) {
+export function login(username, password) {
+  return dispatch => {
+    return auth(username, password)
+      .then(token => dispatch({ type: SET_AUTH_TOKEN, data: token }))
+  }
+}
 
-  const params = {
-    _username: values.username,
-    _password: values.password,
-    _type: 'common'
-  };
-
-  return securityCreateToken(params)
-    .then(res => {
-
-      const now = moment().format('YYYY-MM-DDTHH:mm:ssZ');
-      const then = res.datetime;
-      const timeOffset = moment(now, 'YYYY-MM-DDTHH:mm:ssZ').diff(moment(then, 'YYYY-MM-DDTHH:mm:ssZ')) / 1000;
-
-      const authData = {
-        'username': values.username,
-        'type': res.content.type,
-        'wsseToken': res.content.token,
-        timeOffset
-      }
-
-      this.props.dispatch(setAuth(authData))
-
-      browserHistory.push('/')
-    })
-    .catch(err => {
-      throw err.error
-    });
+export function fetchMineInfo() {
+  return dispatch => {
+    getMineInfo()
+      .then(userInfo => dispatch({ type: SET_MINE_INFO, data: userInfo }))
+  }
 }
